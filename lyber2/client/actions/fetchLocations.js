@@ -23,3 +23,29 @@ function _convertDropoffLatLong(location) {
     return _getLatLong(location).then(({ lat, long }) => dispatch({type: 'RETRIEVE_DROPOFF_LAT_LONG', dropoffLat: lat, dropoffLong: long}))
   }
 }
+
+export function fetchPickupLocation(input) {
+  console.log(input)
+    return (dispatch) => {
+      dispatch({ type: 'FETCHING_SUGGESTED_PICKUP_LOCATIONS' });
+      _fetchLocations(input).then(suggestedPickupLocations => 
+      dispatch({ type: 'DISPLAY_PICKUP_LOCATIONS', suggestedPickupLocations }));
+  };
+}
+  
+export function fetchDropOff(input) {
+  console.log(input)
+    return (dispatch) => {
+      dispatch({ type: 'FETCHING_SUGGESTED_DROPOFFS' });
+      _fetchLocation(input).then(suggestedDropOffs => 
+      dispatch({ type: 'DISPLAY_DROPOFFS', suggestedDropoffs }));
+  };
+}
+  
+export function convertLatLong(pickupLocation, dropoffLocation) {
+  console.log(location)
+  return async (dispatch) => {
+    await dispatch(_convertPickupLatLong(pickupLocation))
+    await dispatch(_convertDropoffLatLong(dropoffLocation))
+  }
+}
