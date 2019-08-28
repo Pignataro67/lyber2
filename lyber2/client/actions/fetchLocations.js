@@ -66,7 +66,9 @@ export function fetchUberEstimate(pickupLat, pickupLong, dropoffLat, dropoffLong
   return (dispatch) => {
     fetch(`RailsApi/uber?pickupLat=${pickupLat}&pickupLong=${pickupLong}&dropoffLat=${dropoffLat}&dropoffLong=${dropoffLong}`)
     .then(res => res.json())
-    .then(data => dispatch({ type: 'ADD_UBER_ESTIMATES_TO_STATE', estimate: data.prices}))
+    .then(data => _normalizeUber(data))
+    .then(estimates => estimates.reverse().slice(1))
+    .then(estimates => dispatch({ type: 'ADD_UBER_ESTIMATES_TO_STATE', estimates: estimates }))
   };
 }
   
@@ -75,7 +77,8 @@ export function fetchLyftEstimate(pickupLat, pickupLong, dropoffLat, dropoffLong
     dispatch({ type: 'FETCHING_LYFT_ESTIMATE'});
     fetch(`RailsApi/lyft?pickupLat=${pickupLat}&pickupLong=${pickupLong}&dropoffLat=${dropoffLat}&dropoffLong=${dropoffLong}`)
     .then(res => res.json())
-    .then(data => dispatch({ type: 'ADD_LYFT_ESTIMATES_TO_STATE', estimate: data.cost_estimates}))
+    .then(data => dispatch({ type: 'ADD_LYFT_ESTIMATES_TO_STATE', estimate: data.cost_estimates})).then(data => _normalizeLyft(data))
+    .then(estimates => dispatch({ type: 'ADD_LYFT_ESTIMATES_TO_STATE', estimates: estimates }))
   };
 }
   
