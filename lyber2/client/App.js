@@ -8,8 +8,23 @@ import { getMapboxKey } from './actions/fetchLocations';
 
 function App() {
   return (
-    <div className="App">
-    </div>
+    <div style ={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: 'auto',
+      height: 'auto',
+      backgroundImage: `url(${Background})`
+    }} className="App">
+    <Router>
+      <div>
+        <Route exact path="/" component ={SearchContainer}/>
+        <Route exact path="/confirm_route" component={ConfirmRouteContainer}/>
+        <Route exact path="/results" component={ResultsContainer}/>
+      </div>
+    </Router>
+  </div>
   );
 }
 
