@@ -7,6 +7,8 @@ import SearchContainer from './containers/SearchContainer';
 import { getMapboxKey } from './actions/fetchLocations';
 import './App.css';
 import PageTitle from './components/PageTitle';
+import Background from './images/Background.jpg'
+import { getMapboxKey } from './actions/mapboxActions'
 
 class App extends Component {
   render() {
