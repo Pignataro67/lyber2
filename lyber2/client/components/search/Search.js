@@ -2,17 +2,22 @@ import React, { Component } from 'react';
 import SearchInput from './SearchInput';
 import Button from '../Button';
 import Card from '../Card';
+import { Redirect } from 'react-router-dom';
 
 class Search extends Component {
 
   state = {
     startingLocation: '',
-    destination: ''
+    destination: '',
+    redirectToConfirmRoute: false
   }
 
-  handleFormSubmit = (e) => {
+  handleFormSubmit = async(e) => {
     e.preventDefault()
-    console.log(this.state)
+    await this.props.actions.converLatLong(this.state.startingLocation, this.state.dropoff)
+    this.setState({
+      redirectToConfirmRoute: true
+    })
   }
 
   handleChangeStart = (e) => {
@@ -27,7 +32,7 @@ class Search extends Component {
     })
   }
 
-  handleStartSearch = (e) => {
+  handlePickupSearch = (e) => {
     e.preventDefault()
     e.stopPropogation()
 
@@ -54,6 +59,12 @@ class Search extends Component {
   }
 
   render() {
+    const { redirectToConfirmRoute } = this.state;
+
+     if(redirectToConfirmRoute) {
+      return <Redirect to='/confirm_route' />;
+    }
+
     return (
     <Card >
       <SearchInput label="Pickup Location" 
@@ -61,13 +72,14 @@ class Search extends Component {
         onChange={this.handleChangeStart} 
         onSubmit={this.handleStartSearch}
         handleUpdateAddress={this.handleUpdateAddress} 
-        value={this.state.pickupLocation}/>
+        loading={this.props.isFetchingPickupLocation}/>
         <br/>
       <SearchInput label="DropOff" 
           suggestedLocations={this.props.suggestedDropOffs}
-          onChange={this.handleChangeDestination} 
+          onChange={this.handleChangeDropOff} 
           onSubmit={this.handleDropOffSearch}
-          handleUpdateAddress={this.handleUpdateDropOffAddress}/>
+          handleUpdateAddress={this.handleUpdateDropOffAddress}
+          loading={this.props.isFetchingDropoff}/>
         <br/>
       <Button buttonTitle="Submit" onClick={this.handleFormSubmit}/>
     </Card >
