@@ -7,7 +7,6 @@ class Results extends Commponent {
 
 componentDidMount() {
   if(this.props.isFetchingUberEstimate) {
-    return <Loader type="line-scale" active />
   }
 }
     

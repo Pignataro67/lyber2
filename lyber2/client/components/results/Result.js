@@ -30,11 +30,12 @@ class Result extends Component {
   tableRows(estimates) {
     return estimates.map((estimate, idx) => {
       return <Table.Row><Table.Cell>{estimate.type}</Table.Cell> 
-    <Table.Cell>{estimate.costEstimate}</Table.Cell><Table.Cell>
-    <Button buttonTitle={`Like ${estimate.counter}`}
+    <Table.Cell>{estimate.costEstimate}</Table.Cell><Table.Cell><Button buttonTitle={`Like ${estimate.counter}`}
       onClick={ () => this.handleOnClick(idx)}></Button></Table.Cell>
     </Table.Row>
-})
+    })
+  }
+
   render() {
     return (
       <div style={{padding: 20}}>
