@@ -20,4 +20,17 @@ class ConfirmRouteContainer extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  ...state
+})
+  
+const mapDispatchToProps = (dispatch) => {
+  return {...bindActionCreators(confirmRouteActions, dispatch)}
+}
+  
+export default connect(mapStateToProps, mapDispatchToProps, (stateProps, dispatchProps, ownProps) => {
+    return { ...stateProps, router: ownProps, actions: dispatchProps,
+    };
+  }) (ConfirmRouteContainer);
+
 export default ConfirmRouteContainer;
