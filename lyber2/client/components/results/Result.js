@@ -9,7 +9,9 @@ class Result extends Component {
   }
 
   componentWillReceiveProps() {
-    const estimates = this.props.estimates.map(({type, costEstimate}) => ({type: type, costEstimate: costEstimate, counter: 0}))
+    if (nextProps.estimates !== this.state.estimates) {
+
+      const estimates = nextProps.estimates.map(({type, costEstimate}) => ({type: type, costEstimate: costEstimate, counter: 0}))
 
      this.setState({
       estimates
