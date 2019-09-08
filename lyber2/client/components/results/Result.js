@@ -8,15 +8,16 @@ class Result extends Component {
     estimates: []
   }
 
-  componentWillReceiveProps() {
-    if (nextProps.estimates !== this.state.estimates) {
+componentWillReceiveProps() {
+  if (nextProps.estimates !== this.state.estimates) {
 
-      const estimates = nextProps.estimates.map(({type, costEstimate}) => ({type: type, costEstimate: costEstimate, counter: 0}))
+    const estimates = nextProps.estimates.map(({type, costEstimate}) => ({type: type, costEstimate: costEstimate, counter: 0}))
 
-     this.setState({
+    this.setState({
       estimates
     })
   }
+}
 
   handleOnClick = (idx) => {
     let estimate = this.state.estimates[idx]
