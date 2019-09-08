@@ -15,13 +15,14 @@ class Results extends Commponent {
 
   render() {
     return (
-      <div>
-        <Card label={this.props.label}>
-          <Result header={"Uber"} uberEstimates={this.props.uberEstimates}/>
-          <Result header={"Lyft"} lyftEstimates={this.props.lyftEstimates}/>
-        </Card>
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+        <Result header={"Uber"} estimates={this.props.resultsReducer.uberEstimates} buttonTitle={"Take me to Uber"}/>
+        <Result header={"Lyft"} estimates={this.props.resultsReducer.lyftEstimates} buttonTitle={"Take me to Lyft"}/>
+        <Link to='/'>
+          <Button buttonTitle="Do you want to start over?"/>
+        </Link>
       </div>
-    )
+    );
   }
 }
 
