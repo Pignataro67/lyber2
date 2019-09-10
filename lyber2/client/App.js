@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';	import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import ConfirmRouteContainer from './containers/ConfirmRouteContainer';
-import ResultsContainer from './containers/ResultsContainer';
-import SearchContainer from './containers/SearchContainer';
+import ConfirmRouteContainer from '../containers/confirmRouteContainer';
+import ResultsContainer from './containers/resultsContainer';
+import SearchContainer from './containers/searchContainer';
 import { getMapboxKey } from './actions/fetchLocations';
 import './App.css';
 import PageTitle from './components/PageTitle';
@@ -18,8 +18,8 @@ class App extends Component {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      width: '100vw',
-      height: '100vh',
+      width: '50vw',
+      height: '75vh',
       backgroundImage: `url(${Background})`
     }} className="App">
         <Router>
